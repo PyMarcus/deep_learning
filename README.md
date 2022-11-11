@@ -83,4 +83,19 @@ exemplo de um funcionamento da arquitetura perceptron:
 
 ![img_4.png](img_4.png)
 
+### Funções de ativação
+
+As entradas de um neurônio fazem transformações lineares, já as funções de ativação
+fazem transformações não lineares
+
+A grande vantagem dessas funções consistem no fato de que qualquer alteração de bias,
+por exemplo, resulte em pequenas alterações no output
+
+Ou seja, elas definem se um neurônio deve ou não ser ativado
+
+
+![img_5.png](img_5.png)
+
+
+
 
