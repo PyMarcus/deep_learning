@@ -107,8 +107,8 @@ Ele consiste em 2 passos:
 
 1) Forward pass: as entradas são passadas e as previsões de saída são obtidas
 2) Backward pass: calcula-se o gradiente e aplica-se a regra da cadeia para atualizar os pesos
-
-### No quesito imagens, a arquitetura de redes convolucionais são as mais usadas
+Ou seja, com a taxa de erro, aplica-se as correções e volta para o início do treinamento
+### No quesito imagens, a arquitetura de redes convolucionais (CNN) são as mais usadas
 
 Essas redes neurais podem classificar e comparar imagens,identificar rostos e etc
 Elas, por sua vez, processam imagens como tensores (matrizes).
@@ -123,3 +123,26 @@ probabilidades para gerar uma única saída.
 
 ![img_6.png](img_6.png)
 
+
+O que é aprendido, no treinamento, são o peso e o bias,assim , cada camada de convolução
+aprendem diferentes detalhes da imagem, cores, formas, tamanhos etc
+
+### PROJETO
+
+
+Identificar o vegetal passado como imagem e apresentar o resultado
+podendo auxiliar na agricultura com a identificação de vegetação
+ e, auxiliar, viajantes, a respeito do vegetal e seu nome
+
+### obs: o processo é bastante pesado e demorado, ao rodar pela primeira vez
+
+
+![img_7.png](img_7.png)
+
+
+BIGDATA extraído de: https://www.kaggle.com/datasets/moltean/fruits
+
+
+execução:
+
+![img_8.png](img_8.png)
