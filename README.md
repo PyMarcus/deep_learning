@@ -97,5 +97,29 @@ Ou seja, elas definem se um neurônio deve ou não ser ativado
 ![img_5.png](img_5.png)
 
 
+Assim, funções de ativação permitem resolver problemas mais complexos, pois, se so houver
+bias, haverá apenas regressões lineares que não resolvem problemas difíceis.
 
+### Backpropagation e treinamento de redes neurais
+
+É um algoritmo muito importante para treinar redes neurais profundas.
+Ele consiste em 2 passos:
+
+1) Forward pass: as entradas são passadas e as previsões de saída são obtidas
+2) Backward pass: calcula-se o gradiente e aplica-se a regra da cadeia para atualizar os pesos
+
+### No quesito imagens, a arquitetura de redes convolucionais são as mais usadas
+
+Essas redes neurais podem classificar e comparar imagens,identificar rostos e etc
+Elas, por sua vez, processam imagens como tensores (matrizes).
+Para analisar imagens, essas redes percebem como volumes, objetos tridimencionais, em
+vez de estruturas planas a serem medidas por largura e altura.
+
+Assim, elas recebem a imagem como um retângulo cujo dimensões, largura e altura,
+são o número de pixels e cujo profundidade representa cada letra do RGB.
+
+Feito isso, é representado várias matrizes de múltiplas dimensões e calculado várias
+probabilidades para gerar uma única saída.
+
+![img_6.png](img_6.png)
 
