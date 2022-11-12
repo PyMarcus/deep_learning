@@ -92,7 +92,35 @@ def cria_modelo():
     """
     # Carrega os pesos do ponto de verificação e reavalie
     modelo.load_weights("model/melhor_modelo.h5")
+    # dados_teste(modelo)
+    faz_previsao("abacaxi.png", modelo, encoder)
 
+
+
+def dados_teste(modelo):
+    # Carregando e preparando os dados de teste
+    camninho_imagens_teste = list(caminho_dados_teste.glob("*/*"))
+    imagens_teste = list(map(lambda x: str(x), camninho_imagens_teste))
+    imagens_teste_labels = list(map(lambda x: extrai_label(x), imagens_teste))
+    imagens_teste_labels = encoder.fit_transform(imagens_teste_labels)
+    imagens_teste_labels = tf.keras.utils.to_categorical(imagens_teste_labels)
+    test_image_paths = tf.convert_to_tensor(imagens_teste)
+    test_image_labels = tf.convert_to_tensor(imagens_teste_labels)
+    dataset_teste = (tf.data.Dataset
+                     .from_tensor_slices((imagens_teste, imagens_teste_labels))
+                     .map(decode_imagens)
+                     .batch(batch_size))
+    imagem, label = next(iter(dataset_teste))
+    print(imagem.shape)
+    print(label.shape)
+    avaliar_modelo(modelo, dataset_teste)
+
+
+def decode_imagens(image, label):
+    image = tf.io.read_file(image)
+    image = tf.io.decode_jpeg(image, channels = 3)
+    image = tf.image.resize(image, [224,224], method = "bilinear")
+    return image, label
 
 
 def treinar(modelo):
@@ -106,6 +134,33 @@ def treinar(modelo):
                          validation_data=prepara_dataset_validacao(),
                          validation_steps=len(y_treino)//batch_size)
 
+
+def avaliar_modelo(modelo, dataset_teste):
+    # Avalia o modelo
+    loss, acc, prec, rec = modelo.evaluate(dataset_teste)
+    print(f"Avaliação:")
+    print(f"Precisão: {prec}")
+    print(f"Perda: {loss}")
+
+
+def carrega_nova_imagem(image_path):
+    image = tf.io.read_file(image_path)
+    image = tf.io.decode_jpeg(image, channels = 3)
+    image = tf.image.resize(image, [224,224], method = "bilinear")
+    plt.imshow(image.numpy()/255)
+    image = tf.expand_dims(image, 0)
+    return image
+
+
+def faz_previsao(image_path, model, enc):
+    image = carrega_nova_imagem(image_path)
+    prediction = model.predict(image)
+    pred = np.argmax(prediction, axis = 1)
+    return enc.inverse_transform(pred)[0]
+
+
+def main():
+    cria_modelo()
 
 
 if __name__ == '__main__':
@@ -143,4 +198,4 @@ if __name__ == '__main__':
     print(label.shape)   # 32 labels, 131 = tamanho dos itens na pasta
     ver_nome_da_image()
     prepara_dataset_validacao()
-    cria_modelo()
+    print(f"FRUTA PASSADA: {main()}")
